@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookAtMe", "LookAtMe\LookAtMe.csproj", "{D7A30491-BED9-40F7-BEC0-9F4D61B9126F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7A30491-BED9-40F7-BEC0-9F4D61B9126F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A30491-BED9-40F7-BEC0-9F4D61B9126F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A30491-BED9-40F7-BEC0-9F4D61B9126F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A30491-BED9-40F7-BEC0-9F4D61B9126F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D0BD561-5EED-4D50-889C-7861E65B92F4}
+	EndGlobalSection
+EndGlobal
