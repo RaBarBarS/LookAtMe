@@ -9,10 +9,16 @@ namespace LookAtMe.Controllers
 {
     public class AboutMe : Controller
     {
+        ////GET: /AboutMe
+        //public string Index()
+        //{
+        //    return "This app will be my portfolio.\nI'm at beggining of my programming journey. Wish me luck!";
+        //}
+
         //GET: /AboutMe
-        public string Index()
+        public IActionResult Index()
         {
-            return "This app will be my portfolio.\nI'm at beggining of my programming journey. Wish me luck!";
+            return View();
         }
     }
 }
