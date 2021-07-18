@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\img\cd-icon-location.svg" />
+    <None Include="wwwroot\img\cd-icon-movie.svg" />
+    <None Include="wwwroot\img\cd-icon-picture.svg" />
+  </ItemGroup>
+
 </Project>
