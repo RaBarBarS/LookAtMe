@@ -1437,9 +1437,6 @@ u, .text-underline {
         left: 0.75em;
         left: var(--space-sm);
         top: 0;
-        -webkit-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-        transform: translateY(-100%);
         width: 0;
         height: 0;
         border: 8px solid transparent;
@@ -3597,9 +3594,6 @@ mark {
 @media (min-width: 64rem) {
     .cd-timeline__container::before {
         left: 50%;
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        transform: translateX(-50%)
     }
 }
 
@@ -3651,7 +3645,6 @@ mark {
         -ms-flex-order: 1;
         order: 1;
         margin-left: calc(5% - 30px);
-        will-change: transform
     }
 
     .cd-timeline__block:nth-child(even) .cd-timeline__img {
@@ -3679,13 +3672,11 @@ mark {
     flex-grow: 1;
     position: relative;
     margin-left: 1.25em;
-    margin-left: var(--space-md);
     background: hsl(0, 0%, 100%);
     background: var(--color-white);
     border-radius: 0.25em;
     border-radius: var(--radius-md);
     padding: 1.25em;
-    padding: var(--space-md);
     box-shadow: 0 3px 0 hsl(205, 38%, 89%);
     box-shadow: 0 3px 0 var(--cd-color-2)
 }
@@ -3712,7 +3703,6 @@ mark {
         width: 45%;
         -ms-flex-positive: 0;
         flex-grow: 0;
-        will-change: transform;
         margin: 0;
         font-size: 0.8em;
         --line-height-multiplier: 1.2
@@ -3750,140 +3740,5 @@ mark {
         left: auto;
         right: 120%;
         text-align: right
-    }
-}
-
-@media (min-width: 64rem) {
-    .cd-timeline__img--hidden, .cd-timeline__content--hidden {
-        visibility: hidden
-    }
-
-    .cd-timeline__img--bounce-in {
-        -webkit-animation: cd-bounce-1 0.6s;
-        animation: cd-bounce-1 0.6s
-    }
-
-    .cd-timeline__content--bounce-in {
-        -webkit-animation: cd-bounce-2 0.6s;
-        animation: cd-bounce-2 0.6s
-    }
-
-    .cd-timeline__block:nth-child(even) .cd-timeline__content--bounce-in {
-        -webkit-animation-name: cd-bounce-2-inverse;
-        animation-name: cd-bounce-2-inverse
-    }
-}
-
-@-webkit-keyframes cd-bounce-1 {
-    0% {
-        opacity: 0;
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5)
-    }
-
-    60% {
-        opacity: 1;
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2)
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1)
-    }
-}
-
-@keyframes cd-bounce-1 {
-    0% {
-        opacity: 0;
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5)
-    }
-
-    60% {
-        opacity: 1;
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2)
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1)
-    }
-}
-
-@-webkit-keyframes cd-bounce-2 {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-100px);
-        transform: translateX(-100px)
-    }
-
-    60% {
-        opacity: 1;
-        -webkit-transform: translateX(20px);
-        transform: translateX(20px)
-    }
-
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0)
-    }
-}
-
-@keyframes cd-bounce-2 {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-100px);
-        transform: translateX(-100px)
-    }
-
-    60% {
-        opacity: 1;
-        -webkit-transform: translateX(20px);
-        transform: translateX(20px)
-    }
-
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0)
-    }
-}
-
-@-webkit-keyframes cd-bounce-2-inverse {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(100px);
-        transform: translateX(100px)
-    }
-
-    60% {
-        opacity: 1;
-        -webkit-transform: translateX(-20px);
-        transform: translateX(-20px)
-    }
-
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0)
-    }
-}
-
-@keyframes cd-bounce-2-inverse {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(100px);
-        transform: translateX(100px)
-    }
-
-    60% {
-        opacity: 1;
-        -webkit-transform: translateX(-20px);
-        transform: translateX(-20px)
-    }
-
-    100% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0)
     }
 }

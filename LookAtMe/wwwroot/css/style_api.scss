@@ -1,259 +1,419 @@
-@import '../../../../../codyhouse-framework/main/assets/css/style.scss'; // ⚠️ make sure to import the CodyHouse framework
-@import url('https://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700'); // custom font
+@import "bourbon";
 
-// -------------------------------------------------
+// variables - colors
 
-// Responsive Vertical Timeline - by CodyHouse.co
+$main-text: #7f8c97; // main text
+$link: #acb7c0; // anchor tags
+$background: #e9f0f5; // body background color
 
-// -------------------------------------------------
+$color-1: #303e49; // blue dark
+$color-2: #c03b44; // red
+$color-3: #ffffff; // white
+$color-4: #75ce66; // green
+$color-5: #f0ca45; // yellow
 
-:root {
-    // colors
-    @include defineColorHSL(--cd-color-1, 206, 21%, 24%); // Navy
-    @include defineColorHSL(--cd-color-2, 205, 38%, 89%); // Blue
-    @include defineColorHSL(--cd-color-3, 207, 10%, 55%); // Grey
-    @include defineColorHSL(--cd-color-4, 70, 69%, 60%); // Green
-    @include defineColorHSL(--cd-color-5, 356, 53%, 49%); // Red
-    @include defineColorHSL(--cd-color-6, 47, 85%, 61%); // Yellow
-    // header
-    --cd-header-height: 200px;
-    // font
-    --font-primary: 'Roboto', serif;
-    --font-secondary: 'Roboto', sans-serif;
+// variables - fonts
+
+$primary-font: 'Droid Serif', serif;
+$secondary-font: 'Open Sans', sans-serif;
+
+// mixins - rem fallback - credits: http://zerosixthree.se/
+
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
 }
 
-@supports(--css: variables) {
-  :root {
-    @include breakpoint(md) {
-      --cd-header-height:  300px;
+@mixin font-size($size) {
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+// mixins - border radius
+
+@mixin border-radius($radius: .25em) {
+    border-radius: $radius;
+}
+
+// layout - breakpoints
+
+$S: 320px;
+$M: 768px;
+$L: 1170px;
+
+// layout - media queries
+
+@mixin MQ($canvas) {
+    @if $canvas == S {
+        @media only screen and (min-width: $S) {
+            @content;
+        }
     }
-  }
+    @else if $canvas == M {
+        @media only screen and (min-width: $M) {
+            @content;
+        }
+    }
+    @else if $canvas == L {
+        @media only screen and (min-width: $L) {
+            @content;
+        }
+    }
 }
 
-.cd-main-header {
-  height: var(--cd-header-height);
-  background: var(--cd-color-1);
-  color: var(--color-white);
-  @include fontSmooth;
+/* -------------------------------- 
 
-  h1 {
-    font-family: var(--font-secondary);
-    color: inherit;
-  }
+Primary style
+
+-------------------------------- */
+
+html * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.cd-timeline {
-  overflow: hidden;
-  padding: var(--space-lg) 0;
-  color: var(--cd-color-3);
-  background-color: lightness(var(--cd-color-2), 1.05);
-  font-family: var(--font-primary);
-
-  h2 {
-    font-family: var(--font-secondary);
-    font-weight: 700;
-  }
+*, *:after, *:before {
+    @include box-sizing(border-box);
 }
 
-.cd-timeline__container {
-  position: relative;
-  padding: var(--space-md) 0;
+body {
+    font: {
+        size: 100%;
+        family: $primary-font;
+    }
 
-  &::before { // this is the timeline vertical line
-    content: '';
+    color: $main-text;
+    background-color: $background;
+}
+
+a {
+    color: $link;
+    text-decoration: none;
+    font-family: $secondary-font;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1, h2 {
+    font-family: $secondary-font;
+    font-weight: bold;
+}
+
+/* -------------------------------- 
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+
+.cd-container { /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+    width: 90%;
+    max-width: $L; // breakpoints inside partials > _layout.scss
+    margin: 0 auto;
+
+    &::after { /* clearfix */
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+/* -------------------------------- 
+
+Main components 
+
+-------------------------------- */
+
+header {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    background: $color-1;
+
+    h1 {
+        color: $color-3;
+        @include font-size(18px);
+    }
+
+    @include MQ(L) {
+        height: 300px;
+        line-height: 300px;
+
+        h1 {
+            @include font-size(24px);
+        }
+    }
+}
+
+#cd-timeline {
+    position: relative;
+    padding: 2em 0;
+
+    margin: {
+        top: 2em;
+        bottom: 2em;
+    }
+
+    &::before {
+        /* this is the vertical line */
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 18px;
+        height: 100%;
+        width: 4px;
+        background: darken($background, 5%);
+    }
+
+    @include MQ(L) {
+        margin: {
+            top: 3em;
+            bottom: 3em;
+        }
+
+        &::before {
+            left: 50%;
+            margin-left: -2px;
+        }
+    }
+}
+
+.cd-timeline-block {
+    position: relative;
+    margin: 2em 0;
+    @include clearfix;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @include MQ(L) {
+        margin: 4em 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.cd-timeline-img {
     position: absolute;
     top: 0;
-    left: 18px;
-    height: 100%;
-    width: 4px;
-    background: var(--cd-color-2);
-  }
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px $color-3, inset 0 2px 0 rgba(#000, .08), 0 3px 0 4px rgba(#000, .05);
 
-  @include breakpoint(md) {
+    img {
+        display: block;
+        width: 24px;
+        height: 24px;
+        position: relative;
+        left: 50%;
+        top: 50%;
+        margin-left: -12px;
+        margin-top: -12px;
+    }
+
+    &.cd-picture {
+        background: $color-4;
+    }
+
+    &.cd-movie {
+        background: $color-2;
+    }
+
+    &.cd-location {
+        background: $color-5;
+    }
+
+    @include MQ(L) {
+        width: 60px;
+        height: 60px;
+        left: 50%;
+        margin-left: -30px;
+        /* Force Hardware Acceleration in WebKit */
+        -webkit-transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+
+        .cssanimations &.is-hidden {
+            visibility: hidden;
+        }
+
+        .cssanimations &.bounce-in {
+            visibility: visible;
+            @include animation(cd-bounce-1 .6s);
+        }
+    }
+}
+
+@include keyframes(cd-bounce-1) {
+    0% {
+        opacity: 0;
+        @include transform(scale(.5));
+    }
+
+    60% {
+        opacity: 1;
+        @include transform(scale(1.2));
+    }
+
+    100% {
+        @include transform(scale(1));
+    }
+}
+
+.cd-timeline-content {
+    position: relative;
+    margin-left: 60px;
+    background: $color-3;
+    @include border-radius;
+    padding: 1em;
+    box-shadow: 0 3px 0 darken($background, 5%);
+    @include clearfix;
+
+    h2 {
+        color: $color-1;
+    }
+
+    p, .cd-read-more, .cd-date {
+        @include font-size(13px);
+    }
+
+    .cd-read-more, .cd-date {
+        display: inline-block;
+    }
+
+    p {
+        margin: 1em 0;
+        line-height: 1.6;
+    }
+
+    .cd-read-more {
+        float: right;
+        padding: .8em 1em;
+        background: $link;
+        color: $color-3;
+        @include border-radius;
+
+        .no-touch &:hover {
+            background-color: lighten($link, 5%);
+        }
+    }
+
+    .cd-date {
+        float: left;
+        padding: .8em 0;
+        opacity: .7;
+    }
+
     &::before {
-      left: 50%;
-      transform: translateX(-50%);
+        content: '';
+        position: absolute;
+        top: 16px;
+        right: 100%;
+        height: 0;
+        width: 0;
+        border: 7px solid transparent;
+        border-right: 7px solid $color-3;
     }
 
-  }
-}
+    @include MQ(M) {
+        h2 {
+            @include font-size(20px);
+        }
 
-.cd-timeline__block {
-  display: flex;
-  position: relative;
-  z-index: 1; // make sure content is above the timeline vertical line
-  margin-bottom: var(--space-lg);
+        p {
+            @include font-size(16px);
+        }
 
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  @include breakpoint(md) {
-    &:nth-child(even) {
-      flex-direction: row-reverse; // for even blocks -> lay out content from right to left
-    }
-  }
-}
-
-.cd-timeline__img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px var(--color-white), inset 0 2px 0 rgba(#000, 0.08), 0 3px 0 4px rgba(#000, 0.05);
-
-  img {
-    width: 24px;
-    height: 24px;
-  }
-
-  @include breakpoint(md) {
-    width: 60px;
-    height: 60px;
-    order: 1; // flex order -> place the image after cd-timeline__content
-    margin-left: calc(5% - 30px);
-    will-change: transform;
-
-    .cd-timeline__block:nth-child(even) & {
-      margin-right: calc(5% - 30px);
-    }
-  }
-}
-
-.cd-timeline__img--picture {
-  background-color: var(--cd-color-4);
-}
-
-.cd-timeline__img--movie {
-  background-color: var(--cd-color-5);
-}
-
-.cd-timeline__img--location {
-  background-color: var(--cd-color-6);
-}
-
-.cd-timeline__content {
-  flex-grow: 1; // expand element so that it takes up all the available space inside its parent
-  position: relative;
-  margin-left: var(--space-md);
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: var(--space-md);
-  box-shadow: 0 3px 0 var(--cd-color-2); 
-
-  &::before { // triangle next to content block
-    content: '';
-    position: absolute;
-    top: 16px;
-    right: 100%;
-    @include triangle(left, 7px, var(--color-white));
-  }
-
-  h2 {
-    color: var(--cd-color-1);
-  }
-
-  @include breakpoint(md) {
-    width: 45%;
-    flex-grow: 0; // prevent element from growing inside its parent
-    will-change: transform;
-    margin: 0;
-    font-size: 0.8em;
-    --line-height-multiplier: 1.2;
-
-    &::before { // triangle
-      top: 24px;
+        .cd-read-more, .cd-date {
+            @include font-size(14px);
+        }
     }
 
-    .cd-timeline__block:nth-child(odd) &::before { // change triangle direction
-      right: auto;
-      left: 100%;
-      @include triangle(right, 7px, var(--color-white)); 
+    @include MQ(L) {
+        margin-left: 0;
+        padding: 1.6em;
+        width: 45%;
+
+        &::before {
+            top: 24px;
+            left: 100%;
+            border-color: transparent;
+            border-left-color: $color-3;
+        }
+
+        .cd-read-more {
+            float: left;
+        }
+
+        .cd-date {
+            position: absolute;
+            width: 100%;
+            left: 122%;
+            top: 6px;
+            @include font-size(16px);
+        }
+
+
+
+        .cssanimations &.is-hidden {
+            visibility: hidden;
+        }
+
+        .cssanimations &.bounce-in {
+            visibility: visible;
+            @include animation(cd-bounce-2 .6s);
+        }
     }
-  }
 }
 
-.cd-timeline__date {
-  color: alpha(var(--cd-color-3), 0.7);
-
-  @include breakpoint(md) {
-    position: absolute;
-    width: 100%;
-    left: 120%;
-    top: 20px;
-
-    .cd-timeline__block:nth-child(even) & {
-      left: auto;
-      right: 120%;
-      text-align: right;
+@include MQ(L) {
+    /* inverse bounce effect on even content blocks */
+    .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
+        @include animation(cd-bounce-2-inverse .6s);
     }
-  }
 }
 
-@include breakpoint(md) { // animations
-  .cd-timeline__img--hidden, .cd-timeline__content--hidden {
-    visibility: hidden;
-  }
+@include keyframes(cd-bounce-2) {
+    0% {
+        opacity: 0;
+        @include transform(translateX(-100px));
+    }
 
-  .cd-timeline__img--bounce-in {
-    animation: cd-bounce-1 0.6s;
-  }
+    60% {
+        opacity: 1;
+        @include transform(translateX(20px));
+    }
 
-  .cd-timeline__content--bounce-in {
-    animation: cd-bounce-2 0.6s;       
-  }
-
-  .cd-timeline__block:nth-child(even) .cd-timeline__content--bounce-in {
-    animation-name: cd-bounce-2-inverse; 
-  }
+    100% {
+        @include transform(translateX(0));
+    }
 }
 
+@include keyframes(cd-bounce-2-inverse) {
+    0% {
+        opacity: 0;
+        @include transform(translateX(100px));
+    }
 
-@keyframes cd-bounce-1 {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);    
-  }
-}
+    60% {
+        opacity: 1;
+        @include transform(translateX(-20px));
+    }
 
-@keyframes cd-bounce-2 {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);   
-  }
-
-  60% {
-    opacity: 1;
-    transform: translateX(20px);       
-  }
-
-  100% {
-    transform: translateX(0);       
-  }
-}
-
-@keyframes cd-bounce-2-inverse {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);   
-  }
-
-  60% {
-    opacity: 1;
-    transform: translateX(-20px);
-  }
-
-  100% {
-    transform: translateX(0);    
-  }
+    100% {
+        @include transform(translateX(0));
+    }
 }
