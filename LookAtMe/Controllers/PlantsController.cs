@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using LookAtMe.Models;
+using LookAtMe.Services;
 
 namespace LookAtMe.Controllers
 {
@@ -12,39 +13,7 @@ namespace LookAtMe.Controllers
     [Route("[controller]")]
     public class PlantsController : ControllerBase
     {
-        private static readonly string[] Names = new[]
-        {
-            "Ginger", "Money tree", "Sun flowers"
-        };
-
-        private static readonly string[] Heights = new[]
-        {
-            "small", "medium", "big"
-        };
-
-        private static readonly string[] Summaries = new[]
-        {
-            "Nice leaves", "Beautiful", "Easy care"
-        };
-
-        private readonly ILogger<PlantsController> _logger;
-
-        public PlantsController(ILogger<PlantsController> logger)
-        {
-            _logger = logger;
-        }
-
         [HttpGet]
-        public IEnumerable<Plant> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(0, Names.Length).Select(index => new Plant
-            {
-                Name = Names[index],
-                Height = Heights[index],
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+        public ActionResult<List<Plant>> GetAll() => PlantService.GetAll();
     }
 }
