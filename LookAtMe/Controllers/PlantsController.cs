@@ -15,5 +15,38 @@ namespace LookAtMe.Controllers
     {
         [HttpGet]
         public ActionResult<List<Plant>> GetAll() => PlantService.GetAll();
+
+        [HttpGet("{name}")]
+        public ActionResult<Plant> Get(string name)
+        {
+            var plant = PlantService.Get(name);
+
+            if (plant == null)
+                return NotFound();
+
+            return plant;
+        }
+
+        [HttpPost]
+        public IActionResult Create(Plant plant)
+        {
+            PlantService.Add(plant);
+            return CreatedAtAction(nameof(Create), new { name = plant.Name }, plant);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(string name, Plant plant)
+        {
+            if (name != plant.Name)
+                return BadRequest();
+
+            var existingPizza = PlantService.Get(name);
+            if (existingPizza is null)
+                return NotFound();
+
+            PlantService.Update(plant);
+
+            return NoContent();
+        }
     }
 }
