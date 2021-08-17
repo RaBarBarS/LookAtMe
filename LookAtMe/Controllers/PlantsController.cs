@@ -48,5 +48,18 @@ namespace LookAtMe.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string name)
+        {
+            var plant = PlantService.Get(name);
+
+            if (plant is null)
+                return NotFound();
+
+            PlantService.Delete(name);
+
+            return NoContent();
+        }
     }
 }
