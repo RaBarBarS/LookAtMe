@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,6 +16,9 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+=======
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+>>>>>>> a60027ab89c48af026654dca7da6cc7f9e976a2d
   </ItemGroup>
 
 </Project>
