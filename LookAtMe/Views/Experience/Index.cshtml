@@ -1,106 +1,60 @@
 ﻿@{
     ViewData["Title"] = "Experience";
 }
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="~/js/main.js"></script>
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
-    <header class="cd-main-header text-center flex flex-column flex-center">
-        <h1>My Work Experience</h1>
-    </header>
 
-    <section class="cd-timeline js-cd-timeline">
-        <div class="container max-width-lg cd-timeline__container">
-            <div class="cd-timeline__block">
-                <div class="cd-timeline__img cd-timeline__img--location">
-                </div> <!-- cd-timeline__img -->
+<style>
+    tr:nth-child(even) {
+        background-color: #D6EEEE;
+    }
+</style>
 
-                <div class="cd-timeline__content text-component">
-                    <h2>Testronic</h2>
-                    <p class="color-contrast-medium"><b>Quality Assurance Technician</b><br/>Manual testing. Reporting bugs.</p>
-
-                    <div class="flex justify-between items-center">
-                        <span class="cd-timeline__date">July 2018 - September 2018</span>
-                    </div>
-                </div> <!-- cd-timeline__content -->
-            </div> <!-- cd-timeline__block -->
-
-            <div class="cd-timeline__block">
-                <div class="cd-timeline__img cd-timeline__img--location">
-                </div> <!-- cd-timeline__img -->
-
-                <div class="cd-timeline__content text-component">
-                    <h2>Wyższa Szkoła Informatyki Stosowanej i Zarządzania WIT w Warszawie</h2>
-                    <p class="color-contrast-medium"><b>Network Manager Intern</b><br />Configuring switches. Creating proper documentation of new network.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="cd-timeline__date">July 2019 - August 2019</span>
-                    </div>
-                </div> <!-- cd-timeline__content -->
-            </div> <!-- cd-timeline__block -->
-
-            <div class="cd-timeline__block">
-                <div class="cd-timeline__img cd-timeline__img--location">
-                </div> <!-- cd-timeline__img -->
-
-                <div class="cd-timeline__content text-component">
-                    <h2>ideas4biology</h2>
-                    <p class="color-contrast-medium"><b>Bioinformatics Analyst Intern</b><br />Performing bioinformatics analysis. RNA-seq analysis. Primers design.</p>
-
-                    <div class="flex justify-between items-center">
-                        <span class="cd-timeline__date">March 2020 - September 2020</span>
-                    </div>
-                </div> <!-- cd-timeline__content -->
-            </div> <!-- cd-timeline__block -->
-
-            <div class="cd-timeline__block">
-                <div class="cd-timeline__img cd-timeline__img--location">
-                </div> <!-- cd-timeline__img -->
-
-                <div class="cd-timeline__content text-component">
-                    <h2>Avanssur</h2>
-                    <p class="color-contrast-medium"><b>Automation Developer Intern</b><br />Designing and creating automated tests. Programming in C# and Vue.js.</p>
-
-                    <div class="flex justify-between items-center">
-                        <span class="cd-timeline__date">November 2020 - June 2021</span>
-                    </div>
-                </div> <!-- cd-timeline__content -->
-            </div> <!-- cd-timeline__block -->
-
-            <div class="cd-timeline__block">
-                <div class="cd-timeline__img cd-timeline__img--location">
-                </div> <!-- cd-timeline__img -->
-
-                <div class="cd-timeline__content text-component">
-                    <h2>Intel</h2>
-                    <p class="color-contrast-medium"><b>Software Development Intern</b><br />Working on code refactoring in PyQt5. Developing new functionalities in desktop app.</p>
-
-                    <div class="flex justify-between items-center">
-                        <span class="cd-timeline__date">July 2021 - Current</span>
-                    </div>
-                </div> <!-- cd-timeline__content -->
-            </div> <!-- cd-timeline__block -->
-
-            <div class="cd-timeline__block">
-                <div class="cd-timeline__img cd-timeline__img--picture">
-                </div> <!-- cd-timeline__img -->
-
-                <div class="cd-timeline__content text-component">
-                    <h2>Your company</h2>
-                    <p class="color-contrast-medium">I will do my best to deliver great code!</p>
-
-                    <div class="flex justify-between items-center">
-                        <span class="cd-timeline__date">Tomorrow?</span>
-                        <a href="#0" class="btn btn--subtle">Contact me.</a>
-                    </div>
-                </div> <!-- cd-timeline__content -->
-            </div> <!-- cd-timeline__block -->
-        </div>
-    </section> <!-- cd-timeline -->
-    <script src="~/js/main.js"></script>
-</body>
-</html>
+<table style="width:100%">
+    <tr>
+        <th style="width:10%">Company</th>
+        <th style="width:20%">Position</th>
+        <th style="width:20%">Time Period</th>
+        <th style="width:50%">Responsibilities</th>
+    </tr>
+    <tr style="height:100px">
+        <td>YOUR COMPANY</td>
+        <td>JUNIOR .NET DEVELOPER</td>
+        <td>TOMORROW?</td>
+        <td>MAKING YOUR PROJECT GREAT</td>
+    </tr>
+    <tr style="height:100px">
+        <td>DXC Technology</td>
+        <td>Junior .net Developer</td>
+        <td>11.2021 - now</td>
+        <td>programming in .net</td>
+    </tr>
+    <tr style="height:100px">
+        <td>Netcompany</td>
+        <td>Consultant</td>
+        <td>10.2021 - 10.2021</td>
+        <td>test suite refactoring</td>
+    </tr>
+    <tr style="height:100px">
+        <td>Intel</td>
+        <td>Software Development Intern</td>
+        <td>07.2021 - 09.2021</td>
+        <td>PyQt5 code refactoring, maintaining test suite</td>
+    </tr>
+    <tr style="height:100px">
+        <td>AXA Avanssur</td>
+        <td>Automation Intern</td>
+        <td>11.2020 - 06.2021</td>
+        <td>developing automation tests, maintaining testing framework, API testing, programming in C#</td>
+    </tr>
+    <tr style="height:100px">
+        <td>Ideas4biology</td>
+        <td>Bioinformatician Analyst Intern</td>
+        <td>03.2020 - 09.2020</td>
+        <td>primers design, RNA-seq analisis</td>
+    </tr>
+    <tr style="height:100px">
+        <td>Testronic Labs</td>
+        <td>Manual Tester</td>
+        <td>07.2018 - 09.2018</td>
+        <td>manual testing, reporting bugs</td>
+    </tr>
+</table> 
