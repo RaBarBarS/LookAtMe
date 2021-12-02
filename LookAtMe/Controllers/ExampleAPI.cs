@@ -22,5 +22,14 @@ namespace LookAtMe.Controllers
                                 .OrderByDescending(b => b.ExperienceId);
             return Ok(experiences);
         }
+
+        [HttpGet] ///ExampleAPI/GetExp
+        public IActionResult GetSkills()
+        {
+            var db = new Models.SkillContext();
+            IOrderedQueryable<Models.Skill> experiences = db.Skill_db
+                                .OrderBy(b => b.SkillId);
+            return Ok(experiences);
+        }
     }
 }
