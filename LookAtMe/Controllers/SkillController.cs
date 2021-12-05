@@ -54,14 +54,27 @@ namespace LookAtMe.Controllers
             return Ok(skills);
         }
 
-        //GET: /Skill/search?namelike = th
+        //GET: /Skill/search?namelike=.net&level=junior
         [HttpGet("Search")]
-        public IActionResult Skill(string namelike)//tu coś nie działa z trafianiem do tego endpointu
+        public IActionResult Skill(string namelike = "", string level = "")//tu coś nie działa z trafianiem do tego endpointu
         {
             var db = new Models.SkillContext();
-            IOrderedQueryable<Models.Skill> result = db.Skill_db
-                                                        .Where(b => b.SkillName.Contains(namelike))
-                                                        .OrderBy(b => b.SkillId);
+            IOrderedQueryable<Models.Skill> result;
+
+            if (level != "")
+            {
+                result = db.Skill_db
+                        .Where(b => b.SkillName.Contains(namelike) && b.SkillLevel == level)
+                        .OrderBy(b => b.SkillId);
+            }
+            else
+            {
+                result = db.Skill_db
+                        .Where(b => b.SkillName.Contains(namelike))
+                        .OrderBy(b => b.SkillId);
+            }
+
+
             if (!result.Any())
             {
                 return NotFound(namelike);
