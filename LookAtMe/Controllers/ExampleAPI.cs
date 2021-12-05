@@ -13,23 +13,5 @@ namespace LookAtMe.Controllers
         {
             return View();
         }
-
-        [HttpGet] ///ExampleAPI/GetExp
-        public IActionResult GetExp()
-        {
-            var db = new Models.ExperienceContext();
-            IOrderedQueryable<Models.Experience> experiences = db.Exp_db
-                                .OrderByDescending(b => b.ExperienceId);
-            return Ok(experiences);
-        }
-
-        [HttpGet] ///ExampleAPI/GetExp
-        public IActionResult GetSkills()
-        {
-            var db = new Models.SkillContext();
-            IOrderedQueryable<Models.Skill> experiences = db.Skill_db
-                                .OrderBy(b => b.SkillId);
-            return Ok(experiences);
-        }
     }
 }

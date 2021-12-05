@@ -36,12 +36,5 @@ namespace LookAtMe.Controllers
             }
             return View();
         }
-
-        private readonly ILogger<ExperienceController> _logger;
-
-        public ExperienceController(ILogger<ExperienceController> logger)
-        {
-            _logger = logger; //zamiast console writeline np. _logger.LogInformation('dzialam');
-        }
     }
 }
