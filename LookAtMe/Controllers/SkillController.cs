@@ -80,6 +80,14 @@ namespace LookAtMe.Controllers
                 return NotFound(namelike);
             }
             return Ok(result);
+            //might think about response more like this:
+            //return Ok(new
+            //{
+            //    TotalCount = totalCount,
+            //    TotalPages = totalPages,
+
+            //    Orders = orders
+            //});
         }
 
         private readonly ILogger<SkillController> _logger;
