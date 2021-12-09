@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
+using LookAtMe.DAL;
+using Microsoft.Extensions.Logging.Console;
 
 namespace LookAtMe.Controllers
 {
@@ -11,6 +13,24 @@ namespace LookAtMe.Controllers
     [Route("[controller]")]
     public class SkillController : Controller
     {
+        //commented out logger as it is for now not used
+
+        //TODO: properly set up logger
+
+        //private readonly ILogger<SkillController> _logger;
+        //public SkillController(ILogger<SkillController> logger, ISkillRepository skillRepository)
+        private readonly ISkillRepository _skillRepository;
+        public SkillController(ISkillRepository skillRepository)
+        {
+           // _logger = logger; //zamiast console writeline np. _logger.LogInformation('dzialam');
+            _skillRepository = skillRepository;
+        }
+        //public SkillController()
+        //    : this(new SkillRepository(new Models.SkillContext()))
+        //{
+        //}
+
+
         [HttpGet] // /Skill
         public IActionResult Skill()
         {
@@ -44,9 +64,9 @@ namespace LookAtMe.Controllers
                 //    _logger.LogInformation($"Database path: {db.DbPath}.");
                 //}
             }
-            var db = new Models.SkillContext();
-            IOrderedQueryable<Models.Skill> skills = db.Skill_db
-                                .OrderBy(b => b.SkillId);
+            
+            IEnumerable<Models.Skill> skills = _skillRepository.GetSkills();
+
             if (!skills.Any())
             {
                 return NotFound();
@@ -56,20 +76,19 @@ namespace LookAtMe.Controllers
 
         //GET: /Skill/search?namelike=.net&level=junior
         [HttpGet("Search")]
-        public IActionResult Skill(string namelike = "", string level = "")//tu coś nie działa z trafianiem do tego endpointu
+        public IActionResult Skill(string namelike = "", string level = "")
         {
-            var db = new Models.SkillContext();
-            IOrderedQueryable<Models.Skill> result;
+            IEnumerable<Models.Skill> result;
 
             if (level != "")
             {
-                result = db.Skill_db
+                result = _skillRepository.GetSkills()
                         .Where(b => b.SkillName.Contains(namelike) && b.SkillLevel == level)
                         .OrderBy(b => b.SkillId);
             }
             else
             {
-                result = db.Skill_db
+                result = _skillRepository.GetSkills()
                         .Where(b => b.SkillName.Contains(namelike))
                         .OrderBy(b => b.SkillId);
             }
@@ -77,7 +96,7 @@ namespace LookAtMe.Controllers
 
             if (!result.Any())
             {
-                return NotFound(namelike);
+                return NotFound();
             }
             return Ok(result);
             //might think about response more like this:
@@ -88,13 +107,6 @@ namespace LookAtMe.Controllers
 
             //    Orders = orders
             //});
-        }
-
-        private readonly ILogger<SkillController> _logger;
-
-        public SkillController(ILogger<SkillController> logger)
-        {
-            _logger = logger; //zamiast console writeline np. _logger.LogInformation('dzialam');
         }
     }
 }
