@@ -25,8 +25,10 @@ namespace LookAtMe
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<AppDbContext>(
+            //    optionsBuilder => optionsBuilder.UseInMemoryDatabase("InMemoryDb"));
             services.AddDbContext<AppDbContext>(
-                optionsBuilder => optionsBuilder.UseInMemoryDatabase("InMemoryDb"));
+                options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=LookAtMeAppDb;Trusted_Connection=True;"));
             services.AddControllersWithViews();
             services.AddScoped<ISkillRepository, SkillRepository>();
         }

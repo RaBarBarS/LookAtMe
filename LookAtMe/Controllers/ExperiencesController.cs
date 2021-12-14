@@ -15,14 +15,11 @@ namespace LookAtMe.Controllers
         [HttpGet] // /Experiences
         public IActionResult Experiences()
         {
-            var db = new Models.ExperienceContext();
-            IOrderedQueryable<Models.Experience> experiences = db.Exp_db
-                                .OrderByDescending(b => b.ExperienceId);
-            if (!experiences.Any())
-            {
-                return NotFound();
-            }
-            return Ok(experiences);
+            //if (!experiences.Any())
+            //{
+            //    return NotFound();
+            //}
+            return Ok();
         }
 
         private readonly ILogger<ExperiencesController> _logger;
