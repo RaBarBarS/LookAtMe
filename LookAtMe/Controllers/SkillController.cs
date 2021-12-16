@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using LookAtMe.DAL;
+using LookAtMe.Models;
 using Microsoft.Extensions.Logging.Console;
 
 namespace LookAtMe.Controllers
@@ -34,37 +35,6 @@ namespace LookAtMe.Controllers
         [HttpGet] // /Skill
         public IActionResult Skill()
         {
-            {
-                //using (var db = new Models.SkillContext())
-                //{
-                //    Console.WriteLine("Inserting a new skills");
-                //    db.Add(new Models.Skill { SkillName = ".net programming", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = ".net mvc", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = ".net core", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = "entity framework", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = "sql", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = "C#", SkillLevel = "junior/intermediate" });
-                //    db.Add(new Models.Skill { SkillName = "windows forms", SkillLevel = "junior/intermediate" });
-                //    db.Add(new Models.Skill { SkillName = "algorithms", SkillLevel = "junior/intermediate" });
-                //    db.Add(new Models.Skill { SkillName = "python", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = "pyQT5", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = "pandas", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = "R", SkillLevel = "junior" });
-                //    db.Add(new Models.Skill { SkillName = "linux", SkillLevel = "intermediate" });
-                //    db.Add(new Models.Skill { SkillName = "windows", SkillLevel = "intermediate" });
-                //    db.Add(new Models.Skill { SkillName = "jira", SkillLevel = "intermediate" });
-                //    db.Add(new Models.Skill { SkillName = "git", SkillLevel = "junior/intermediate" });
-                //    db.SaveChanges();
-
-                //    _logger.LogInformation("Querying for a blog");
-                //    var skill = db.Skill_db
-                //        .OrderBy(b => b.SkillId)
-                //        .Last();
-                //    _logger.LogInformation('\n' + skill.SkillId.ToString() + '\n');
-                //    _logger.LogInformation($"Database path: {db.DbPath}.");
-                //}
-            }
-            
             IEnumerable<Models.Skill> skills = _skillRepository.GetSkills();
 
             if (!skills.Any())
@@ -76,14 +46,14 @@ namespace LookAtMe.Controllers
 
         //GET: /Skill/search?namelike=.net&level=junior
         [HttpGet("Search")]
-        public IActionResult Skill(string namelike = "", string level = "")
+        public IActionResult Skill(string namelike = "", int level = -1)//-1 not passed by user
         {
             IEnumerable<Models.Skill> result;
 
-            if (level != "")
+            if (level != -1)
             {
                 result = _skillRepository.GetSkills()
-                        .Where(b => b.SkillName.Contains(namelike) && b.SkillLevel == level)
+                        .Where(b => b.SkillName.Contains(namelike) && b.SkillLevel == (Level)level)
                         .OrderBy(b => b.SkillId);
             }
             else

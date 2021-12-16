@@ -9,7 +9,7 @@ namespace LookAtMe.Infrastructure
 {
     public class AppDbContext : DbContext
     {
-        private string _connectionString = @"Server=.\SQLEXPRESS;Database=AppDb;Trusted_Connection=True;";
+        private string _connectionString = "Server=(localdb)\\mssqllocaldb;Database=LookAtMeAppDb;Trusted_Connection=True;";
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Experience> Experiences { get; set; }
 
@@ -17,21 +17,5 @@ namespace LookAtMe.Infrastructure
             base(dbContextOptions)
         {
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Skill>()
-        //        .Property(s => s.SkillName)
-        //        .IsRequired();
-
-        //    modelBuilder.Entity<Experience>()
-        //        .Property(e => e.CompanyName)
-        //        .IsRequired();
-        //}
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(_connectionString);
-        //}
     }
 }

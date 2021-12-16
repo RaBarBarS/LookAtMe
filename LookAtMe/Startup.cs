@@ -29,13 +29,15 @@ namespace LookAtMe
             //    optionsBuilder => optionsBuilder.UseInMemoryDatabase("InMemoryDb"));
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=LookAtMeAppDb;Trusted_Connection=True;"));
+            services.AddScoped<LookAtMeDataSeeder>();
             services.AddControllersWithViews();
             services.AddScoped<ISkillRepository, SkillRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, LookAtMeDataSeeder seeder)
         {
+            seeder.Seed();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

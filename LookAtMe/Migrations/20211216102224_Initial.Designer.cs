@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LookAtMe.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211214171541_Init")]
-    partial class Init
+    [Migration("20211216102224_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,13 +58,15 @@ namespace LookAtMe.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("SkillLevel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SkillLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("SkillName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Skilltype")
+                        .HasColumnType("int");
 
                     b.HasKey("SkillId");
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LookAtMe.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,8 @@ namespace LookAtMe.Migrations
                     SkillId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SkillName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SkillLevel = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SkillLevel = table.Column<int>(type: "int", nullable: false),
+                    Skilltype = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

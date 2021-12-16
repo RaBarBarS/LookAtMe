@@ -56,13 +56,15 @@ namespace LookAtMe.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("SkillLevel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SkillLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("SkillName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Skilltype")
+                        .HasColumnType("int");
 
                     b.HasKey("SkillId");
 
