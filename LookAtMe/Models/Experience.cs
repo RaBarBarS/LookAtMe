@@ -17,6 +17,7 @@ namespace LookAtMe.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; } //not required since person can still work there
         [Required]
+        [StringLength(200)]
         public string Responsibilitiese { get; set; }
     }
 }
