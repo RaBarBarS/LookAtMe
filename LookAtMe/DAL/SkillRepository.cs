@@ -21,12 +21,14 @@ namespace LookAtMe.DAL
 
         public Skill GetSkillByID(int skillId)
         {
-            return context.Skills.Find(skillId);//TODO: search by level and name NOT id!
+            return context.Skills.FirstOrDefault(s => s.SkillId == skillId);
         }
 
-        public void InsertSkill(Skill skill)
+        public Skill InsertSkill(Skill skill)
         {
             context.Skills.Add(skill);
+            context.SaveChanges();
+            return skill;
         }
 
         public void DeleteSkill(int skillId)

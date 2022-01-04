@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using LookAtMe.DAL;
 using LookAtMe.Models;
 using Microsoft.Extensions.Logging.Console;
+using AutoMapper;
 
 namespace LookAtMe.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/skill")]
     public class SkillController : Controller
     {
         //commented out logger as it is for now not used
@@ -21,19 +22,16 @@ namespace LookAtMe.Controllers
         //private readonly ILogger<SkillController> _logger;
         //public SkillController(ILogger<SkillController> logger, ISkillRepository skillRepository)
         private readonly ISkillRepository _skillRepository;
-        public SkillController(ISkillRepository skillRepository)
+        private readonly IMapper _mapper;
+        public SkillController(ISkillRepository skillRepository, IMapper mapper)
         {
            // _logger = logger; //zamiast console writeline np. _logger.LogInformation('dzialam');
             _skillRepository = skillRepository;
+            _mapper = mapper;
         }
-        //public SkillController()
-        //    : this(new SkillRepository(new Models.SkillContext()))
-        //{
-        //}
 
-
-        [HttpGet] // /Skill
-        public IActionResult Skill()
+        [HttpGet] ///api/Skill
+        public ActionResult<IEnumerable<SkillDto>> GetAll()
         {
             IEnumerable<Models.Skill> skills = _skillRepository.GetSkills();
 
@@ -41,7 +39,31 @@ namespace LookAtMe.Controllers
             {
                 return NotFound();
             }
-            return Ok(skills);
+
+            var skillsDtos = _mapper.Map<List<SkillDto>>(skills);
+
+            return Ok(skillsDtos);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<IEnumerable<Skill>> Get([FromRoute] int id)
+        {
+            var skill = _skillRepository.GetSkillByID(id);
+            if (skill == null)
+            {
+                return NotFound();
+            }
+
+            var skillDto = _mapper.Map<SkillDto>(skill);
+
+            return Ok(skillDto);
+        }
+
+        [HttpPost]
+        public ActionResult CreateSkill([FromBody] Skill skill)
+        {
+            var result = _skillRepository.InsertSkill(skill);
+            return Created($"/api/skill/{skill.SkillId}", null);
         }
 
         //GET: /Skill/search?namelike=.net&level=junior
