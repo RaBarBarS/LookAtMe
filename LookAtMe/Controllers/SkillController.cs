@@ -60,9 +60,11 @@ namespace LookAtMe.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateSkill([FromBody] Skill skill)
+        public ActionResult CreateSkill([FromBody] CreateSkillDto dto)
         {
-            var result = _skillRepository.InsertSkill(skill);
+            var skill = _mapper.Map<Skill>(dto);
+            _skillRepository.InsertSkill(skill);
+
             return Created($"/api/skill/{skill.SkillId}", null);
         }
 
