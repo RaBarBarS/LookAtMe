@@ -19,10 +19,7 @@ namespace LookAtMe.MappingProfiles
                 .ForMember(m => m.Skilltype, c => c.MapFrom(s => s.Skilltype));
 
             CreateMap<CreateSkillDto, Skill>()
-                .ForMember(m => m.SkillId, c => c.MapFrom(s => s.SkillId))
-                .ForMember(m => m.SkillName, c => c.MapFrom(s => s.SkillName))
-                .ForMember(m => m.SkillLevel, c => c.MapFrom(s => s.SkillLevel))
-                .ForMember(m => m.Skilltype, c => c.MapFrom(s => s.Skilltype));
+                .ForMember(m => m.SkillLevel, c => c.MapFrom(m => Enum.Parse(typeof(Level), m.SkillLevel)));
         }
     }
 }

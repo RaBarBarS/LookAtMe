@@ -9,7 +9,7 @@ namespace LookAtMe.Models
     {
         public int SkillId { get; set; }
         public string SkillName { get; set; }
-        public Level SkillLevel { get; set; }
-        public SkillType Skilltype { get; set; }
+        public string SkillLevel { get; set; }
+        public string Skilltype { get; set; }
     }
 }

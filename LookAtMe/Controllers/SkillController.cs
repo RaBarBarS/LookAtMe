@@ -62,10 +62,21 @@ namespace LookAtMe.Controllers
         [HttpPost]
         public ActionResult CreateSkill([FromBody] CreateSkillDto dto)
         {
-            var skill = _mapper.Map<Skill>(dto);
-            _skillRepository.InsertSkill(skill);
 
-            return Created($"/api/skill/{skill.SkillId}", null);
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                var skill = _mapper.Map<Skill>(dto);
+                var result = _skillRepository.InsertSkill(skill);
+
+                return Created($"/api/skill/{result.SkillId}", null);
+            }
+            catch(Exception e)
+            {
+                //place for logger
+            }
+            return BadRequest();
         }
 
         //GET: /Skill/search?namelike=.net&level=junior

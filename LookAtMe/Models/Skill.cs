@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace LookAtMe.Models
 {
@@ -14,8 +16,10 @@ namespace LookAtMe.Models
         [Required]
         public string SkillName { get; set; }
         [Required]
+        [JsonConverter(typeof(StringEnumConverter))]
         public Level SkillLevel { get; set; }
         [Required]
+        [JsonConverter(typeof(StringEnumConverter))]
         public SkillType Skilltype { get; set; }
     }
 }
