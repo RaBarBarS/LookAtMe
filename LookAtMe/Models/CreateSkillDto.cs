@@ -23,7 +23,7 @@ namespace LookAtMe.Models
             {
                 yield return new ValidationResult("Invalid SkillType type", new[] { nameof(SkillType) });
             }
-            SkillLevel = typeResult.ToString();
+            Skilltype = typeResult.ToString();
         }
     }
 }
