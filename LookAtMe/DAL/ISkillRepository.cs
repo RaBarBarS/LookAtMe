@@ -11,7 +11,7 @@ namespace LookAtMe.DAL
         IEnumerable<Skill> GetSkills();
         Skill GetSkillByID(int skillId);
         Skill InsertSkill(Skill skill);
-        void DeleteSkill(int skillId);
+        bool DeleteSkill(int skillId);
         void UpdateSkill(Skill skill);
         void Save();
     }

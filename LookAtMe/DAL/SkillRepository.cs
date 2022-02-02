@@ -31,10 +31,20 @@ namespace LookAtMe.DAL
             return skill;
         }
 
-        public void DeleteSkill(int skillId)
+        public bool DeleteSkill(int skillId)
         {
-            Skill skill = context.Skills.Find(skillId);//TODO: do deleting by id will be ok?
+            Skill skill = context
+                            .Skills
+                            .FirstOrDefault(s => s.SkillId == skillId);
+
+            if (skill == null)
+            {
+                return false;
+            }
+
             context.Skills.Remove(skill);
+            context.SaveChanges();
+            return true;
         }
 
         public void UpdateSkill(Skill skill)

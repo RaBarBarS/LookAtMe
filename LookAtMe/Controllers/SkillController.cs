@@ -79,6 +79,19 @@ namespace LookAtMe.Controllers
             return BadRequest();
         }
 
+        [HttpDelete("{id}")]
+        public ActionResult DeleteSkill([FromRoute] int id)
+        {
+            var isDeleted = _skillRepository.DeleteSkill(id);
+
+            if (!isDeleted)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
         //GET: /Skill/search?namelike=.net&level=junior
         [HttpGet("Search")]
         public IActionResult Skill(string namelike = "", int level = -1)//-1 not passed by user
