@@ -30,7 +30,12 @@ namespace LookAtMe.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet] ///api/Skill
+        /// <summary>
+        /// Gets all skills from database
+        /// </summary>
+        /// <returns></returns>
+        //api/Skill
+        [HttpGet]
         public ActionResult<IEnumerable<SkillDto>> GetAll()
         {
             IEnumerable<Models.Skill> skills = _skillRepository.GetSkills();
@@ -45,6 +50,12 @@ namespace LookAtMe.Controllers
             return Ok(skillsDtos);
         }
 
+        /// <summary>
+        /// Gets skill by ID 
+        /// </summary>
+        /// <param name="id">ID of skill to be found</param>
+        /// <returns></returns>
+        //api/Skill/5
         [HttpGet("{id}")]
         public ActionResult<IEnumerable<Skill>> Get([FromRoute] int id)
         {
@@ -59,6 +70,11 @@ namespace LookAtMe.Controllers
             return Ok(skillDto);
         }
 
+        /// <summary>
+        /// Creates skill 
+        /// </summary>
+        /// <param name="dto">informations needed to create a skill</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult CreateSkill([FromBody] CreateSkillDto dto)
         {
@@ -79,6 +95,12 @@ namespace LookAtMe.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Deletes skill based on provided ID
+        /// </summary>
+        /// <param name="id">ID of skill to be deleted</param>
+        /// <returns></returns>
+        //api/Skill/3
         [HttpDelete("{id}")]
         public ActionResult DeleteSkill([FromRoute] int id)
         {
@@ -92,7 +114,13 @@ namespace LookAtMe.Controllers
             return NoContent();
         }
 
-        //GET: /Skill/search?namelike=.net&level=junior
+        /// <summary>
+        /// Gets all skills that fit filters.
+        /// </summary>
+        /// <param name="namelike">substring of skill name (case sensitive)</param>
+        /// <param name="level">name of the skill leve</param>
+        /// <returns></returns>
+        //GET: api/Skill/search?namelike=.net&level=junior
         [HttpGet("Search")]
         public IActionResult Skill(string namelike = "", int level = -1)//-1 not passed by user
         {
