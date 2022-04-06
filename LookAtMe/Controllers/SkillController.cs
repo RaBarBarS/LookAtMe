@@ -47,7 +47,10 @@ namespace LookAtMe.Controllers
 
             var skillsDtos = _mapper.Map<List<SkillDto>>(skills);
 
-            return Ok(skillsDtos);
+            SkillPage result = new SkillPage();
+            result.SkillsList = skills.ToList();
+
+            return View("Index", result);
         }
 
         /// <summary>
@@ -67,7 +70,11 @@ namespace LookAtMe.Controllers
 
             var skillDto = _mapper.Map<SkillDto>(skill);
 
-            return Ok(skillDto);
+            SkillPage result = new SkillPage();
+            result.SkillsList = new List<Skill>();
+            result.SkillsList.Add(skill);
+
+            return View("Index", result);
         }
 
         /// <summary>
@@ -120,31 +127,35 @@ namespace LookAtMe.Controllers
         /// <param name="namelike">substring of skill name (case sensitive)</param>
         /// <param name="level">name of the skill leve</param>
         /// <returns></returns>
-        //GET: api/Skill/search?namelike=.net&level=junior
+        //GET: api/Skill/search?namelike=.net&level=1
         [HttpGet("Search")]
         public IActionResult Skill(string namelike = "", int level = -1)//-1 not passed by user
         {
-            IEnumerable<Models.Skill> result;
+            IEnumerable<Models.Skill> skills;
 
             if (level != -1)
             {
-                result = _skillRepository.GetSkills()
+                skills = _skillRepository.GetSkills()
                         .Where(b => b.SkillName.Contains(namelike) && b.SkillLevel == (Level)level)
                         .OrderBy(b => b.SkillId);
             }
             else
             {
-                result = _skillRepository.GetSkills()
+                skills = _skillRepository.GetSkills()
                         .Where(b => b.SkillName.Contains(namelike))
                         .OrderBy(b => b.SkillId);
             }
 
 
-            if (!result.Any())
+            if (!skills.Any())
             {
                 return NotFound();
             }
-            return Ok(result);
+
+            SkillPage result = new SkillPage();
+            result.SkillsList = skills.ToList();
+
+            return View("Index", result);
             //might think about response more like this:
             //return Ok(new
             //{
