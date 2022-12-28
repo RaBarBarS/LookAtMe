@@ -1,0 +1,5 @@
+﻿apiRules:
+- include:
+    uidRegex: ^LookAtMe.Controllers
+- exclude:
+    uidRegex: ^LookAtMe.*

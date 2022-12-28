@@ -1,0 +1,33 @@
+﻿@model SkillPage
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
+<p>Levels: beginner, improver, intermediate, advanced <br />
+    Types: soft skills, technical skills<br />
+    (try basic sorting of columns)<br /><br />
+</p>
+
+<table class="table sortable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var skill in Model.SkillsList)
+        {
+        <tr>
+            <td>@skill.SkillId  </td>
+            <td>@skill.SkillName</td>
+            <td>@skill.SkillLevel</td>
+            <td>@skill.Skilltype</td>
+        </tr>
+        }
+    </tbody>
+</table>
