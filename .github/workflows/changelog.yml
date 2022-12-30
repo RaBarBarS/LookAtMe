@@ -1,4 +1,4 @@
-# Trigger the workflow on milestone events
+# Trigger the workflow on milestone events.
 on:
   milestone:
     types: [closed]
@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Create Release Notes
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: docker://decathlon/release-notes-generator-action:2.0.1
         env:
+          OUTPUT_FOLDER: temp_release_notes
+          USE_MILESTONE_TITLE: "true"
           GITHUB_TOKEN: ${{secrets.CHANGELOG_TOKEN}}
