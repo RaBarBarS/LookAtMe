@@ -1,4 +1,4 @@
-# Trigger the workflow on milestone events
+# Trigger the workflow on milestone events.
 on:
   milestone:
     types: [closed]
