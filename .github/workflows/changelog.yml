@@ -18,15 +18,6 @@ jobs:
           token: ${{secrets.CHANGELOG_TOKEN}}
           tag: v0.0.3
 
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          draft: false
-          name: ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.changes }}
-          token: ${{secrets.CHANGELOG_TOKEN}}
-
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
