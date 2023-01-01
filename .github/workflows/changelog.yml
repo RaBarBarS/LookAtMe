@@ -2,17 +2,34 @@
 on:
   milestone:
     types: [closed]
-name: Milestone Closure
+name: Milestone Closure          
 jobs:
-  create-release-notes:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@master
-      - name: "Build Changelog"
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v3
-        env:
-            GITHUB_TOKEN: ${{secrets.CHANGELOG_TOKEN}}
-      - run: echo ${{steps.build_changelog.outputs.changelog}}
-            echo ${{steps.build_changelog.outputs.failed}}
-            echo ${{steps.build_changelog.outputs.pull_requests}}
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Update CHANGELOG
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{secrets.CHANGELOG_TOKEN}}
+          tag: v0.0.3
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          draft: false
+          name: ${{ github.ref_name }}
+          body: ${{ steps.changelog.outputs.changes }}
+          token: ${{secrets.CHANGELOG_TOKEN}}
+
+      - name: Commit CHANGELOG.md
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
+          file_pattern: CHANGELOG.md
