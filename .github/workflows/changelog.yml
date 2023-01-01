@@ -16,11 +16,11 @@ jobs:
         uses: requarks/changelog-action@v1
         with:
           token: ${{secrets.CHANGELOG_TOKEN}}
-          tag: v0.0.4
+          tag: v0.0.5
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: main
+          branch: master
           commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
           file_pattern: CHANGELOG.md
