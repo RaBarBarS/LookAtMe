@@ -13,7 +13,7 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v3
         env:
             GITHUB_TOKEN: ${{secrets.CHANGELOG_TOKEN}}
-      - name: Conda Info
+      - name: Show
         shell: bash
         run: |
-          cat ${{steps.build_changelog.outputs.changelog}}
+          echo ${{steps.build_changelog.outputs.changelog}}
