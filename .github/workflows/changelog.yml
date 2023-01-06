@@ -18,7 +18,7 @@ jobs:
         uses: requarks/changelog-action@v1
         with:
           token: ${{secrets.CHANGELOG_TOKEN}}
-          tag: v0.0.7
+          tag: ${{ github.ref_name }}
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
