@@ -1,5 +1,5 @@
 # Trigger the workflow on milestone events
-name: Milestone Closure
+name: On Release Closure
 
 on:
   release:
