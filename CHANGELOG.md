@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.4] - 2023-01-07
+### :recycle: Refactors
+- [`f1e9d41`](https://github.com/RaBarBarS/LookAtMe/commit/f1e9d41632e4bd8cdf93ae3ca9ce1b2ec1a18c35) - change automatic commit message *(commit by [@RaBarBarS](https://github.com/RaBarBarS))*
+
+
 ## [v0.0.8] - 2023-01-06
 ### :sparkles: New Features
 - [`47630d6`](https://github.com/RaBarBarS/LookAtMe/commit/47630d663d451a3c2443312e47d4a664f9214b52) - changelog automatization *(PR [#26](https://github.com/RaBarBarS/LookAtMe/pull/26) by [@RaBarBarS](https://github.com/RaBarBarS))*
@@ -29,3 +34,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.0.6]: https://github.com/RaBarBarS/LookAtMe/compare/v0.0.5...v0.0.6
 [v0.0.7]: https://github.com/RaBarBarS/LookAtMe/compare/v0.0.6...v0.0.7
 [v0.0.8]: https://github.com/RaBarBarS/LookAtMe/compare/v0.0.7...v0.0.8
+[v0.0.4]: https://github.com/RaBarBarS/LookAtMe/compare/v0.0.3...v0.0.4
