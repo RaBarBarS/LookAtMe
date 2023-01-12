@@ -1,2 +1,2 @@
 # LookAtMe
-This site is intended to be my portfolio. Check it out! 
+This site is intended to be my playground. 
