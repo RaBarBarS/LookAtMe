@@ -1,10 +1,9 @@
 # Trigger the workflow on milestone events
-name: On Release Publish
+name: On Release Closure
 
 on:
-  push:
-    tags:
-      - v[0-9]+.[0-9]+.[0-9]+
+  release:
+    types: [published]
       
 jobs:
   deploy:
@@ -24,6 +23,6 @@ jobs:
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: master
-          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }}'
+          branch: feature/changelog_automatization
+          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
           file_pattern: CHANGELOG.md
